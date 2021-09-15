@@ -2,50 +2,35 @@ const settings = {
   "name": "hello-frontity",
   "state": {
     "frontity": {
-      "url": "https://test.frontity.org",
+      "url": "https://cases.testzone.in",
       "title": "Test Frontity Blog",
       "description": "WordPress installation for Frontity development"
+
     }
   },
   "packages": [
     {
-      "name": "@frontity/mars-theme",
-      "state": {
-        "theme": {
-          "menu": [
-            [
-              "Home",
-              "/"
-            ],
-            [
-              "Nature",
-              "/category/nature/"
-            ],
-            [
-              "Travel",
-              "/category/travel/"
-            ],
-            [
-              "Japan",
-              "/tag/japan/"
-            ],
-            [
-              "About Us",
-              "/about-us/"
-            ]
-          ],
-          "featured": {
-            "showOnList": false,
-            "showOnPost": false
-          }
-        }
-      }
+      name: "my-first-theme"
     },
     {
       "name": "@frontity/wp-source",
+      active:true,
       "state": {
         "source": {
-          "url": "https://test.frontity.org"
+          //"url": "https://cases.testzone.in",
+          "api":"https://cases.testzone.in/wp-json",
+          "postTypes": [
+            {
+              type: "patient_details",
+              endpoint: "patientdetails",
+              archive: "/patient-details"
+            },
+            {
+              type: "myplugin",
+              endpoint: "myplugin",
+              archive: "/myplugin"
+            }
+          ]
         }
       }
     },
