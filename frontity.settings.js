@@ -21,8 +21,8 @@ const settings = {
           "api":"https://cases.testzone.in/wp-json",
           "postTypes": [
             {
-              type: "patient_details",
-              endpoint: "patientdetails",
+              type: "patient-details",
+              endpoint: "patient-details",
               archive: "/patient-details"
             },
             {
