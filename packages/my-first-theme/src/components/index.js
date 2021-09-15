@@ -14,18 +14,21 @@ const Root = ({state}) => {
             <h1>Frontity Workshop</h1>
             <p>Current URL: {state.router.link}</p>
             <nav>
-                <Link link="/">Home</Link>
-                <br />
-                <Link link="/page/2">More posts</Link>
-                <br />
-                <Link link="/about-us">About Us</Link>
+                {/*<Link link="/">Home</Link>*/}
+                {/*<br />*/}
+                {/*<Link link="/page/2">More posts</Link>*/}
+                {/*<br />*/}
+                {/*<Link link="/about-us">About Us</Link>*/}
+                {/*<Link link="/patient-details">Patient List</Link>*/}
             </nav>
             <main>
                 <Switch>
-                    <List when={data.isArchive} />
+
                     <Patient when={data.isPatientDetails} />
-                    <div when={data.isPost}>This is a post</div>
-                    <div when={data.isPage}>This is a page</div>
+                    <List when={data.isPatientDetailsArchive}  />
+                    <Link link="/patient-details">Patient List</Link>
+                    {/*<div when={data.isPost}>This is a post</div>*/}
+                    {/*<div when={data.isPage}>This is a page</div>*/}
                 </Switch>
             </main>
         </>

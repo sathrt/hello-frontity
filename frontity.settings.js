@@ -24,11 +24,6 @@ const settings = {
               type: "patient-details",
               endpoint: "patient-details",
               archive: "/patient-details"
-            },
-            {
-              type: "myplugin",
-              endpoint: "myplugin",
-              archive: "/myplugin"
             }
           ]
         }
