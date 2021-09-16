@@ -9,14 +9,20 @@ const Patient = ({state,libraries}) => {
     const {api} = libraries.source;
     async function get_visits ()
     {
-        let mypromise = new Promise(function(){
-            api.get({
-                endpoint: "/myrest/visit-details/"+uhid,
-                // params: {'uhid':uhid},
-            });
+    //     let mypromise = new Promise(function(){
+    //         api.get({
+    //             endpoint: "/myrest/visit-details/"+uhid,
+    //             // params: {'uhid':uhid},
+    //         });
+    //     });
+    // const val = await mypromise;
+    // return val;
+        const response = await libraries.source.api.get({ endpoint: "/myrest/visit-details/"+uhid });
+        const entitiesAdded = await libraries.source.populate({ response, state });
+        entitiesAdded.forEach(({ date_of_visit, id, link }) => {
+            console.log({ date_of_visit, id, link });
         });
-    const val = await mypromise;
-    return val;
+        return "done";
     }
 
     const visits = get_visits();
