@@ -12,7 +12,7 @@ const Root = ({state}) => {
     return (
         <>
             <h1>Frontity Workshop</h1>
-            <p>Current URL: {state.router.link}</p>
+            {/*<p>Current URL: {state.router.link}</p>*/}
             <nav>
                 {/*<Link link="/">Home</Link>*/}
                 {/*<br />*/}

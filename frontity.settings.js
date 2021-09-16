@@ -18,12 +18,18 @@ const settings = {
       "state": {
         "source": {
           //"url": "https://cases.testzone.in",
-          "api":"https://cases.testzone.in/wp-json",
+          // "api":"https://cases.testzone.in/wp-json",
+          "api":"http://farmfoods.in/wp-json",
           "postTypes": [
             {
               type: "patient-details",
               endpoint: "patient-details",
               archive: "/patient-details"
+            },
+            {
+              type: "post",
+              endpoint: "myplugin/v1",
+              // archive: "/patient-details"
             }
           ]
         }
