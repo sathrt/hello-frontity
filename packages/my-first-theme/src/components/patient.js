@@ -18,9 +18,9 @@ const Patient = ({state,libraries,actions}) => {
         return "done";
     }
 
-    // useEffect(() => {
-    //     actions.source.fetch("/myrest/visit-details/"+uhid);
-    // },[]);
+    useEffect(() => {
+        actions.source.fetch("/myrest/visit-details/"+uhid);
+    },[]);
     // function get_visits ()
     // {
     //     // const response = libraries.source.api.get({ endpoint: "/myrest/visit-details/"+uhid });
@@ -42,46 +42,14 @@ const Patient = ({state,libraries,actions}) => {
     //     // });
     //     return "done";
     // }
-    function MakeQuerablePromise(promise) {
-        // Don't modify any promise that has been already modified.
-        if (promise.isFulfilled) return promise;
 
-        // Set initial state
-        var isPending = true;
-        var isRejected = false;
-        var isFulfilled = false;
-
-        // Observe the promise, saving the fulfillment in a closure scope.
-        var result = promise.then(
-            function(v) {
-                isFulfilled = true;
-                isPending = false;
-                return v;
-            },
-            function(e) {
-                isRejected = true;
-                isPending = false;
-                throw e;
-            }
-        );
-
-        result.isFulfilled = function() { return isFulfilled; };
-        result.isPending = function() { return isPending; };
-        result.isRejected = function() { return isRejected; };
-        return result;
-
-    }
-    var visits= '';
-    useEffect(() => {
-        visits = MakeQuerablePromise(get_visits());
-    },[]);
-    // const visits = MakeQuerablePromise(get_visits());
-    // const visits = state.source.get("/myrest/visit-details/"+uhid);
+    // const visits = get_visits();
+    const visits = state.source.get("/myrest/visit-details/"+uhid);
     // visits.then(
     //     function (value){
     //         console.log('success');
-    //         return "ff";
-    //                     },
+    //
+    //         },
     //     function (error){console.log('fail');}
     // );
 
@@ -99,7 +67,7 @@ const Patient = ({state,libraries,actions}) => {
 
     // const visit_data = state.source.get(state.source['visit-details']);
     console.log('Return Ready');
-    if (visits=='') {
+    if (visits.isReady) {
         return (
             <div>
                 {/*<h2>{post.title.rendered}</h2>*/}
@@ -107,20 +75,12 @@ const Patient = ({state,libraries,actions}) => {
                 <div>Diagnosis:{post.diagnosis}</div>
                 {/*<div dangerouslySetInnerHTML={{ __html: post.content.rendered }} />*/}
             </div>
-        );
+        )
     }
-    else {
-        return (
-            <div>
-                {/*<h2>{post.title.rendered}</h2>*/}
-                <h2>UHID:{post.uhid}</h2>
-                <div>Diagnosis:{post.diagnosis}</div>
-                <div>List</div>
-                {/*<div dangerouslySetInnerHTML={{ __html: post.content.rendered }} />*/}
-            </div>
-        );
+    else
+    {
+        return "Loading";
     }
-
 }
 
 export default connect(Patient)
