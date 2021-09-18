@@ -7,6 +7,7 @@ const Patient = ({state,libraries}) => {
     const post = state.source[data.type][data.id];
     const uhid = post.uhid;
     const {api} = libraries.source;
+    console.log('aq');
     async function get_visits ()
     {
     //     let mypromise = new Promise(function(){
@@ -20,12 +21,30 @@ const Patient = ({state,libraries}) => {
         const response = await libraries.source.api.get({ endpoint: "/myrest/visit-details/"+uhid });
         const entitiesAdded = await libraries.source.populate({ response, state });
         entitiesAdded.forEach(({ date_of_visit, id, link }) => {
-            console.log({ date_of_visit, id, link });
+            //console.log({ date_of_visit, id, link });
         });
         return "done";
     }
 
     const visits = get_visits();
+    visits.then(
+        function (value){console.log('success');},
+        function (error){console.log('fail');}
+    );
+
+    var visit_list='';
+    if (state.source['visit-details'] == null)
+    {
+
+    }
+    else {
+        visit_list = Object.keys(state.source['visit-details']);
+        visit_list.forEach(function(list_item){
+            //console.log(list_item);
+        });
+    }
+
+    // const visit_data = state.source.get(state.source['visit-details']);
     // get_visits().then(
     //     function (value)
     //     {

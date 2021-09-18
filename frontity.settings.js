@@ -27,6 +27,11 @@ const settings = {
               archive: "/patient-details"
             },
             {
+              type: "visit-details",
+              endpoint: "visit-details",
+              archive: "/visit-details"
+            },
+            {
               type: "post",
               endpoint: "myplugin/v1",
               // archive: "/patient-details"
