@@ -31,12 +31,14 @@ const Patient = ({state,libraries,actions}) => {
     if (visits.isReady) {
         const visit_data = state.source['visit-details'];
         const visit_ids = Object.keys(visit_data);
-        var dates = <div>dd</div>;
+        var dates = [];
+        var i=0;
         visit_ids.forEach(
             function (visit_id)
             {
                 console.log(state.source['visit-details'][visit_id]['date_of_visit']);
-                dates +=<div>ee</div>;
+                dates.push(<div key={i}>{state.source['visit-details'][visit_id]['date_of_visit']}</div>);
+                i++;
             }
         );
         return (
