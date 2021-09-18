@@ -18,62 +18,34 @@ const Patient = ({state,libraries,actions}) => {
         return "done";
     }
 
-    useEffect(() => {
-        actions.source.fetch("/myrest/visit-details/"+uhid);
+    useEffect(async () => {
+        actions.source.fetch("/myrest/visit-details/"+uhid,{ endpoint:"/myrest/visit-details/"});
+        const response = await libraries.source.api.get({ endpoint: "/myrest/visit-details/"+uhid });
+        const entitiesAdded = await libraries.source.populate({ response, state });
     },[]);
-    // function get_visits ()
-    // {
-    //     // const response = libraries.source.api.get({ endpoint: "/myrest/visit-details/"+uhid });
-    //     const response = state.source.get("/myrest/visit-details/"+uhid );
-    //     // response.then(
-    //     //     function (value)
-    //     //     {
-    //     //         console.log('success');
-    //     //         const entitiesAdded = libraries.source.populate({ response, state });
-    //     //     },
-    //     //     function (error)
-    //     //     {
-    //     //         console.log('error');
-    //     //     }
-    //     // );
-    //     // const entitiesAdded = libraries.source.populate({ response, state });
-    //     // entitiesAdded.forEach(({ date_of_visit, id, link }) => {
-    //     //     //console.log({ date_of_visit, id, link });
-    //     // });
-    //     return "done";
-    // }
 
-    // const visits = get_visits();
     const visits = state.source.get("/myrest/visit-details/"+uhid);
-    // visits.then(
-    //     function (value){
-    //         console.log('success');
-    //
-    //         },
-    //     function (error){console.log('fail');}
-    // );
 
-    // var visit_list='';
-    // if (state.source['visit-details'] == null)
-    // {
-    //
-    // }
-    // else {
-    //     visit_list = Object.keys(state.source['visit-details']);
-    //     visit_list.forEach(function(list_item){
-    //         //console.log(list_item);
-    //     });
-    // }
 
-    // const visit_data = state.source.get(state.source['visit-details']);
     console.log('Return Ready');
     if (visits.isReady) {
+        const visit_data = state.source['visit-details'];
+        const visit_ids = Object.keys(visit_data);
+        var dates = <div>dd</div>;
+        visit_ids.forEach(
+            function (visit_id)
+            {
+                console.log(state.source['visit-details'][visit_id]['date_of_visit']);
+                dates +=<div>ee</div>;
+            }
+        );
         return (
             <div>
                 {/*<h2>{post.title.rendered}</h2>*/}
                 <h2>UHID:{post.uhid}</h2>
                 <div>Diagnosis:{post.diagnosis}</div>
                 {/*<div dangerouslySetInnerHTML={{ __html: post.content.rendered }} />*/}
+                {dates}
             </div>
         )
     }

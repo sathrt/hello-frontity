@@ -27,6 +27,11 @@ const settings = {
               archive: "/patient-details"
             },
             {
+              type:'visit-list',
+              endpoint: 'myrest/visit-details',
+              archive: "/myrest/visit-details"
+            },
+            {
               type: "visit-details",
               endpoint: "visit-details",
               archive: "/visit-details"
