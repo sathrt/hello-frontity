@@ -37,8 +37,10 @@ const Patient = ({state,libraries,actions}) => {
             function (visit_id)
             {
                 console.log(state.source['visit-details'][visit_id]['date_of_visit']);
-                dates.push(<div key={i}>{state.source['visit-details'][visit_id]['date_of_visit']}</div>);
-                i++;
+                if (state.source['visit-details'][visit_id]['uhid']== post.uhid) {
+                    dates.push(<div key={i}>{state.source['visit-details'][visit_id]['date_of_visit']}</div>);
+                    i++;
+                }
             }
         );
         return (

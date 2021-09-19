@@ -9,9 +9,10 @@ import Patient from "./patient"
 
 const Root = ({state}) => {
     const data = state.source.get(state.router.link)
+
     return (
         <>
-            <h1>Frontity Workshop</h1>
+            <h1>Cases in React</h1>
             {/*<p>Current URL: {state.router.link}</p>*/}
             <nav>
                 {/*<Link link="/">Home</Link>*/}
