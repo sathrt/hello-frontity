@@ -9,31 +9,48 @@ import Patient from "./patient"
 
 const Root = ({state}) => {
     const data = state.source.get(state.router.link)
-
-    return (
-        <>
-            <h1>Cases in React</h1>
-            {/*<p>Current URL: {state.router.link}</p>*/}
-            <nav>
-                {/*<Link link="/">Home</Link>*/}
-                {/*<br />*/}
-                {/*<Link link="/page/2">More posts</Link>*/}
-                {/*<br />*/}
-                {/*<Link link="/about-us">About Us</Link>*/}
-                {/*<Link link="/patient-details">Patient List</Link>*/}
-            </nav>
-            <main>
-                <Switch>
-
+    if (data.isPatientDetailsArchive)
+    {
+        return (
+            <>
+                <h1>Patient List</h1>
+                <nav>
+                    {/*<Link link="/">Home</Link>*/}
+                    {/*<br />*/}
+                    {/*<Link link="/page/2">More posts</Link>*/}
+                    {/*<br />*/}
+                    {/*<Link link="/about-us">About Us</Link>*/}
+                    {/*<Link link="/patient-details">Patient List</Link>*/}
+                </nav>
+                <main>
+                        <List when={data.isPatientDetailsArchive}  />
+                </main>
+            </>
+        )
+    }
+    else if (data.isPatientDetails)
+    {
+        return (
+            <>
+                <h1>Patient Details</h1>
+                <main>
                     <Patient when={data.isPatientDetails} />
-                    <List when={data.isPatientDetailsArchive}  />
+                </main>
+            </>
+        )
+    }
+    else
+    {
+        return (
+            <>
+                <h1>Home</h1>
+                <main>
                     <Link link="/patient-details">Patient List</Link>
-                    {/*<div when={data.isPost}>This is a post</div>*/}
-                    {/*<div when={data.isPage}>This is a page</div>*/}
-                </Switch>
-            </main>
-        </>
-    )
+                </main>
+            </>
+        )
+    }
+
 }
 
 export default connect(Root)
