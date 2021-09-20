@@ -15,7 +15,7 @@ const Patient = ({state,libraries,actions}) => {
     },[]);
     const visits = state.source.get("/myrest/visit-details/"+uhid);
     console.log('Return Ready');
-    if (visits.isReady) {
+    if (visits.isReady)  {
         const visit_data = state.source['visit-details'];
         const visit_ids = Object.keys(visit_data);
         var dates = [];
