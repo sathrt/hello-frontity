@@ -7,13 +7,21 @@ const Patient = ({state,libraries,actions}) => {
     const post = state.source[data.type][data.id];
     const uhid = post.uhid;
     const {api} = libraries.source;
-
-    useEffect(async () => {
-        actions.source.fetch("/myrest/visit-details/"+uhid,{ endpoint:"/myrest/visit-details/"});
-        const response = await libraries.source.api.get({ endpoint: "/myrest/visit-details/"+uhid });
-        const entitiesAdded = await libraries.source.populate({ response, state });
+    var visit_link = '';
+    useEffect( () => {
+        // actions.source.fetch("visit-details/?meta_key=uhid&meta_value="+uhid,{ endpoint:"visit-details"});
+        actions.source.fetch("/visit-details/?meta_key=uhid&meta_value="+uhid);
+        // const response = await libraries.source.api.get({ endpoint: "/myrest/visit-details/"+uhid });
+        // const response = await libraries.source.api.get({ endpoint: "visit-details/?meta_key=uhid&meta_value="+uhid });
+        // const entitiesAdded = await libraries.source.populate({ response, state });
+        // entitiesAdded.forEach(({ date_of_visit, id, link }) => {
+        //     if (visit_link != '') {
+        //         visit_link = link;
+        //     }
+        // });
     },[]);
-    const visits = state.source.get("/myrest/visit-details/"+uhid);
+    // const visits = state.source.get("/visit-details/?meta_key=uhid&meta_value="+uhid);
+    const visits = state.source.get("/visit-details/?meta_key=uhid&meta_value="+uhid);
     console.log('Return Ready');
     if (visits.isReady)  {
         const visit_data = state.source['visit-details'];
