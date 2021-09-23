@@ -6,32 +6,19 @@ const Patient = ({state,libraries,actions}) => {
     const data = state.source.get(state.router.link);
     const post = state.source[data.type][data.id];
     const uhid = post.uhid;
-    const {api} = libraries.source;
-    var visit_link = '';
-
     const [flag, setFlag] = useState({
         isReady: false,
         items: []
     });
     useEffect( async () => {
-        // actions.source.fetch("visit-details/?meta_key=uhid&meta_value="+uhid,{ endpoint:"visit-details"});
-        // actions.source.fetch("/visit-details/?meta_key=uhid&meta_value="+uhid);
-        // const response = await libraries.source.api.get({ endpoint: "/myrest/visit-details/"+uhid });
         const response = await libraries.source.api.get({ endpoint: "visit-details/?meta_key=uhid&meta_value="+uhid });
         const entitiesAdded = await libraries.source.populate({ response, state });
-        // entitiesAdded.forEach(({ date_of_visit, id, link }) => {
-        //     if (visit_link != '') {
-        //         visit_link = link;
-        //     }
-        // });
-
         await setFlag({
             isReady: true,
             items: entitiesAdded
         });
+       state.visits_retrieved.uhid.push(uhid);
     },[]);
-    // const visits = state.source.get("/visit-details/?meta_key=uhid&meta_value="+uhid);
-    // const visits = state.source.get("/visit-details/?meta_key=uhid&meta_value="+uhid);
     console.log('Return Ready');
     if (flag.isReady)  {
         const visit_data = state.source['visit-details'];
@@ -47,19 +34,25 @@ const Patient = ({state,libraries,actions}) => {
                     i++;
                 }
             }
-        ); //added for git commit
+        );
         return (
             <div>
                 <h2>UHID:{post.uhid}</h2>
                 <div>Diagnosis:{post.diagnosis}</div>
-                {/*<div dangerouslySetInnerHTML={{ __html: post.content.rendered }} />*/}
                 {dates}
             </div>
         )
     }
     else
     {
-        return "Loading";
+        return (
+            <div>
+                <h2>UHID:{post.uhid}</h2>
+                <div>Diagnosis:{post.diagnosis}</div>
+                {/*<div dangerouslySetInnerHTML={{ __html: post.content.rendered }} />*/}
+                <div>Loading Patient visits..</div>
+            </div>
+        )
     }
 }
 

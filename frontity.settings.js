@@ -42,6 +42,9 @@ const settings = {
               // archive: "/patient-details"
             }
           ]
+        },
+        "visits_retrieved":{
+          "uhid":[]
         }
       }
     },
