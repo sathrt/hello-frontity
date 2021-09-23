@@ -12,10 +12,8 @@ const Patient = ({state,libraries,actions}) => {
     });
     useEffect( async () => {
         if (state.visits_retrieved.uhid.includes(uhid)) {
-            //do nothing
             setFlag({
                 isReady: true
-
             });
         }
         else {
@@ -28,7 +26,6 @@ const Patient = ({state,libraries,actions}) => {
             state.visits_retrieved.uhid.push(uhid);
         }
     },[]);
-    console.log('Return Ready');
     if (flag.isReady)  {
         const visit_data = state.source['visit-details'];
         const visit_ids = Object.keys(visit_data);
@@ -37,7 +34,6 @@ const Patient = ({state,libraries,actions}) => {
         visit_ids.forEach(
             function (visit_id)
             {
-                console.log(state.source['visit-details'][visit_id]['date_of_visit']);
                 if (state.source['visit-details'][visit_id]['uhid']== post.uhid) {
                     dates.push(<div key={i}>{state.source['visit-details'][visit_id]['date_of_visit']}</div>);
                     i++;
