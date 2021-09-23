@@ -11,13 +11,22 @@ const Patient = ({state,libraries,actions}) => {
         items: []
     });
     useEffect( async () => {
-        const response = await libraries.source.api.get({ endpoint: "visit-details/?meta_key=uhid&meta_value="+uhid });
-        const entitiesAdded = await libraries.source.populate({ response, state });
-        await setFlag({
-            isReady: true,
-            items: entitiesAdded
-        });
-       state.visits_retrieved.uhid.push(uhid);
+        if (state.visits_retrieved.uhid.includes(uhid)) {
+            //do nothing
+            setFlag({
+                isReady: true
+
+            });
+        }
+        else {
+            const response = await libraries.source.api.get({endpoint: "visit-details/?meta_key=uhid&meta_value=" + uhid});
+            const entitiesAdded = await libraries.source.populate({response, state});
+            await setFlag({
+                isReady: true,
+                items: entitiesAdded
+            });
+            state.visits_retrieved.uhid.push(uhid);
+        }
     },[]);
     console.log('Return Ready');
     if (flag.isReady)  {
