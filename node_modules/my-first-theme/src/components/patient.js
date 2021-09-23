@@ -10,7 +10,7 @@ const Patient = ({state,libraries,actions}) => {
     var visit_link = '';
     useEffect( async () => {
         // actions.source.fetch("visit-details/?meta_key=uhid&meta_value="+uhid,{ endpoint:"visit-details"});
-        // actions.source.fetch("/visit-details/?meta_key=uhid&meta_value="+uhid);
+        actions.source.fetch("/visit-details/?meta_key=uhid&meta_value="+uhid);
         // const response = await libraries.source.api.get({ endpoint: "/myrest/visit-details/"+uhid });
         const response = await libraries.source.api.get({ endpoint: "visit-details/?meta_key=uhid&meta_value="+uhid });
         const entitiesAdded = await libraries.source.populate({ response, state });
