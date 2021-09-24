@@ -23,7 +23,9 @@ const Root = ({state}) => {
                     {/*<Link link="/patient-details">Patient List</Link>*/}
                 </nav>
                 <main>
-                        <List when={data.isPatientDetailsArchive}  />
+                    {/*<List when={data.isPatientDetailsArchive}  />*/}
+                    <Link link="/add-patient">Add Patient</Link>
+                        <List data={data}/>
                 </main>
             </>
         )
@@ -34,21 +36,30 @@ const Root = ({state}) => {
             <>
                 <h1>Patient Details</h1>
                 <main>
-                    <Patient when={data.isPatientDetails} />
+                    {/*<Patient when={data.isPatientDetails} />*/}
+                    <Link link="/add-patient">Add Patient</Link>
+                    <Patient />
+
                 </main>
             </>
         )
     }
     else
     {
-        return (
-            <>
-                <h1>Home</h1>
-                <main>
-                    <Link link="/patient-details">Patient List</Link>
-                </main>
-            </>
-        )
+        if (state.router.link == "/add-patient/"){
+            return (<div dangerouslySetInnerHTML= {{__html:state.source[data.type][data.id].content.rendered}} />)
+        }
+        else {
+            return (
+                <>
+                    <h1>Home</h1>
+                    <main>
+                        <Link link="/add-patient">Add Patient</Link><br/>
+                        <Link link="/patient-details">Patient List</Link>
+                    </main>
+                </>
+            )
+        }
     }
 
 }
