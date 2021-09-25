@@ -6,6 +6,8 @@ import Link from "@frontity/components/link"
 import Switch from "@frontity/components/switch"
 import List from "./list"
 import Patient from "./patient"
+import Add_New_patient from "./new_patient";
+import Login from "./login";
 
 const Root = ({state}) => {
     const data = state.source.get(state.router.link)
@@ -47,13 +49,18 @@ const Root = ({state}) => {
     else
     {
         if (state.router.link == "/add-patient/"){
-            return (<div dangerouslySetInnerHTML= {{__html:state.source[data.type][data.id].content.rendered}} />)
+            // return (<div dangerouslySetInnerHTML= {{__html:state.source[data.type][data.id].content.rendered}} />)
+            return (<Add_New_patient />)
+        }
+        else if (state.router.link == "/login/"){
+            return (<Login />)
         }
         else {
             return (
                 <>
                     <h1>Home</h1>
                     <main>
+                        <Link link="/login">Login</Link><br/>
                         <Link link="/add-patient">Add Patient</Link><br/>
                         <Link link="/patient-details">Patient List</Link>
                     </main>
