@@ -23,6 +23,7 @@
     "@frontity/tiny-router": "^1.4.4",
     "@frontity/wp-source": "^1.11.5",
     "frontity": "^1.17.0",
-    "my-first-theme": "file:packages/my-first-theme"
+    "my-first-theme": "file:packages/my-first-theme",
+    "react-router-dom": "^5.3.0"
   }
 }

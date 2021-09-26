@@ -1,8 +1,9 @@
 import React,{useState} from "react"
 import { connect } from "frontity"
 import Link from "@frontity/components/link"
+import  { Redirect } from 'react-router-dom'
 
-const Login =() => {
+const Login =({state,actions}) => {
     const [values, setValues] = useState({
         username: '', password: ''
     });
@@ -29,12 +30,16 @@ const Login =() => {
         try {
             const response = saveFormData();
             response.then(response => response.json()).then(responseJson => {
-                console.log(responseJson);})
+                console.log(responseJson['token']);
+                state["bearer-token"].token=responseJson['token'];
+            })
             // response.then(console.log(response.text()))
             alert('Your login is successful!');
+
             setValues({
                 username: '', password: ''
             });
+            actions.router.set('/');
         } catch (e) {
             alert(`Login failed! ${e.message}`);
         }

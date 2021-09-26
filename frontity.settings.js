@@ -46,7 +46,8 @@ const settings = {
         },
         "visits_retrieved":{
           "uhid":[]
-        }
+        },
+        'bearer-token':{"token":''}
       }
     },
     "@frontity/tiny-router",
