@@ -2,9 +2,9 @@ import React,{useState} from "react"
 import { connect } from "frontity"
 import Link from "@frontity/components/link"
 
-const Add_New_patient =() => {
+const Add_New_patient =(state) => {
     const [values, setValues] = useState({
-        uhid: '', name: ''
+        uhid: '', patient_name: '',status:'publish',title:''
     });
     const set = name => {
         return ({ target: { value } }) => {
@@ -13,11 +13,14 @@ const Add_New_patient =() => {
     };
 
     const saveFormData = async () => {
-        const response = await fetch('/patient-details', {
+        values.title = values.uhid;
+        const response = await fetch('http://farmfoods.in/wp-json/wp/v2/patient-details', {
+            crossDomain:true,
+            headers: {'Content-Type':'application/json','Authorization': 'Bearer ' + state.state['bearer-token'].token},
             method: 'POST',
             body: JSON.stringify(values)
         });
-        if (response.status !== 200) {
+        if (response.status !== 201  ) {
             throw new Error(`Request failed: ${response.status}`);
         }
         return response
@@ -25,10 +28,9 @@ const Add_New_patient =() => {
     const onSubmit = async (event) => {
         event.preventDefault(); // Prevent default submission
         try {
-            const response = await saveFormData();
-            response.then(console.log(response.text()))
+            const response_2 = await saveFormData();
             alert('Your registration was successfully submitted!');
-            setValues({
+            setValues( {
                 uhid: '', name: ''
             });
         } catch (e) {
@@ -41,7 +43,7 @@ const Add_New_patient =() => {
             <label>UHID:</label><br/>
             <input value={values.uhid} required onChange={set('uhid')}/><br/>
             <label>Name:</label><br/>
-            <input value={values.name} onChange={set('name')}/><br/>
+            <input value={values.name} onChange={set('patient_name')}/><br/>
             <button type="submit">Submit</button>
         </form>
     )

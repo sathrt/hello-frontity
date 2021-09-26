@@ -19,8 +19,8 @@ const settings = {
         "source": {
           //"url": "https://cases.testzone.in",
           // "api":"https://cases.testzone.in/wp-json",
-          // "api":"http://farmfoods.in/wp-json",
-          "url":"http://farmfoods.in",
+          "api":"http://farmfoods.in/wp-json",
+          //"url":"http://farmfoods.in",
           "postTypes": [
             {
               type: "patient-details",
