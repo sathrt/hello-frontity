@@ -17,9 +17,9 @@ const settings = {
       active:true,
       "state": {
         "source": {
-          //"url": "https://cases.testzone.in",
+          "url": "https://cases.testzone.in",
           // "api":"https://cases.testzone.in/wp-json",
-          "api":"http://farmfoods.in/wp-json",
+          //"api":"http://farmfoods.in/wp-json",
           //"url":"http://farmfoods.in",
           "postTypes": [
             {
